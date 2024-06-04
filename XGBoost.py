@@ -29,7 +29,7 @@ print(X_test)
 print(y_test)
 
 # Inicjalizacja modelu
-model = xgb.XGBRegressor(verbose= -100, n_estimators=20)
+model = xgb.XGBRegressor(verbose=-100, n_estimators=20, learning_rate=0.1, max_leaves=31)
 
 # Trening modelu
 model.fit(X_train, y_train)
@@ -86,7 +86,7 @@ plt.title('Ważność cech')
 
 # Krzywa uczenia się (Learning Curve)
 plt.figure()
-model = xgb.XGBRegressor(n_estimators=20)
+model = xgb.XGBRegressor(n_estimators=20, learning_rate=0.1, max_leaves=31)
 train_sizes, train_scores, test_scores = learning_curve(
     model, X, y, scoring='neg_mean_squared_error', train_sizes=np.linspace(0.1, 1.0, 20), verbose=0)
 train_scores_mean = -train_scores.mean(axis=1)

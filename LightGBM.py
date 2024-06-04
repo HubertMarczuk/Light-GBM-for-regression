@@ -10,7 +10,7 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error, r
 
 # Wczytywanie danych
 data = pd.read_csv("Concrete_Data.csv",decimal=',',sep=';')
-df = pd.DataFrame(data) 
+df = pd.DataFrame(data)
   
 # Wyświetlenie kilku pierwszych wierszy ramki, aby wyświetlić podgląd danych
 print(df.head()) 
@@ -29,7 +29,7 @@ print(X_test)
 print(y_test)
 
 # Inicjalizacja modelu
-model = lgb.LGBMRegressor(verbose= -100, n_estimators=20)
+model = lgb.LGBMRegressor(verbose=-100, n_estimators=20, boosting_type='gbdt', learning_rate=0.1, num_leaves=31, max_depth=-1)
 
 # Trening modelu
 model.fit(X_train, y_train)
@@ -86,7 +86,7 @@ plt.title('Ważność cech')
 
 # Krzywa uczenia się (Learning Curve)
 plt.figure()
-model = lgb.LGBMRegressor(verbose= -100, n_estimators=20)
+model = lgb.LGBMRegressor(verbose=-100, n_estimators=20, boosting_type='gbdt', learning_rate=0.1, num_leaves=31, max_depth=-1)
 train_sizes, train_scores, test_scores = learning_curve(
     model, X, y, scoring='neg_mean_squared_error', train_sizes=np.linspace(0.1, 1.0, 20), verbose=0)
 train_scores_mean = -train_scores.mean(axis=1)
